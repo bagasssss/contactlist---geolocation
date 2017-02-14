@@ -1,0 +1,35 @@
+<div class="modal-header">
+            <h3>Edit Form</h3>
+</div>
+
+<form name="newContactForm">
+    <div class="modal-body panel panel-body">
+        <div class="col-md-8 form-group">
+            <input type="name" class="form-control" placeholder="{{ctrl.editContact.name}}" required ng-model="newContact.name">
+        </div>
+        <div class="col-md-8 form-group">
+            <input type="name" class="form-control" placeholder="{{ctrl.editContact.username}}" required ng-model="newContact.username">
+        </div>
+        <div class="col-md-8 form-group">
+            <input type="mail" class="form-control" placeholder="{{ctrl.editContact.email}}" required ng-model="newContact.email">
+        </div>
+        <div class="col-md-8 form-group">
+            <input type="text" class="form-control" placeholder="{{ctrl.editContact.address.street}}" ng-model="newContact.address.street">
+        </div>
+        <div class="col-md-8 form-group">
+            <input type="number" class="form-control" placeholder="{{ctrl.editContact.phone}}" required ng-model="newContact.phone">
+        </div>
+        <div class="col-md-8 form-group">
+            <input type="text" class="form-control" placeholder="{{ctrl.editContact.website}}" required ng-model="newContact.website">
+        </div>
+        <div class="col-md-8 form-group">
+            <input type="text" class="form-control" placeholder="{{ctrl.editContact.company.name}}" required ng-model="newContact.company.name">
+        </div>
+
+    </div>
+    <div class="modal-footer panel panel-body">
+              <button class="btn btn-warning" ng-click="ctrl.deleteContact()">Delete contact</button>
+              
+              <button class="btn btn-success" ng-click="ctrl.applyEditing(newContact)" ng-disabled="newContactForm.$invalid">edit</button>
+    </div>
+</form>

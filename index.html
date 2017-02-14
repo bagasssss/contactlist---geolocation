@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="contactList">
+<head>
+	<title>Contact List</title>
+	<meta charset="utf-8" />
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/Site.css" rel="stylesheet" />
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/angular.js"></script>
+    
+    <script src="Scripts/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script src="Services/services.js"></script>
+    <script src="Directives/directives.js"></script>
+    <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
+    <script src="Scripts/ngclipboard.js"></script>
+    <script src="Scripts/ngclipboard.min.js"></script>
+
+    
+
+    <script>
+    	angular.module("contactList", ["list.services","list.directives", "ui.bootstrap", "ngclipboard"])
+    </script>
+</head>
+<body>
+	
+			<list-directive></list-directive>
+	
+</body>
+</html>
