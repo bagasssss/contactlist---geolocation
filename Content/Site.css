@@ -24,3 +24,8 @@ b {
     background-color: white;
 }
 
+form .ng-invalid {
+
+	border: 1px solid red;
+}
+

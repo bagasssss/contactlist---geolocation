@@ -8,9 +8,15 @@
 				restrict: "E",
 				templateUrl: "Views/listTemplate.html",
 				controllerAs: "ctrl",
-				controller: function() {
+				controller: function($scope) {
 					var vm = this;
 
+
+						/*$scope.$watch("$viewContentLoaded", function(){
+								alert("All data loaded!");
+						});*/
+
+					//vm.phoneRegex = "((\(\d{3}\) ?)|(\d{3}[- \.]))?\d{3}[- \.]\d{4}(\s(x\d+)?){0,1}$";
 					vm.list;
 					vm.filterType = 'name';
 					vm.id = 11;
@@ -34,24 +40,27 @@
 							console.log("data in ctrl");
 							console.log(vm.list);
 
+
 						})
 					};
 
 					vm.changeFilterType = function(filterTypeFromClick) {
-											console.log("change filter to "+filterTypeFromClick);
-											if (vm.filterType === filterTypeFromClick) {
-												vm.filterType = "-"+vm.filterType;
-											} else {
-												vm.filterType = filterTypeFromClick;
-											}
-						};
+						console.log("change filter to "+filterTypeFromClick);
+						if (vm.filterType === filterTypeFromClick) {
+							vm.filterType = "-"+vm.filterType;
+						} else {
+							vm.filterType = filterTypeFromClick;
+						}
+					};
 
+					vm.newContactModal;
 					vm.openModal = function() {
-						$uibModal.open({
+						vm.newContactModal = $uibModal.open({
 							templateUrl: 'Views/modalWindowForNewContact.html',
 							animation: true,
 							ariaLabelledBy: 'modal-title',
 							ariaDescribedBy: 'modal-body',
+							
 
 						})
 					};
@@ -62,22 +71,27 @@
 							name: newContact.name,
 							username: newContact.username,
 							email: newContact.email,
-							address: newContact.address,
+							address: {street: newContact.address},
 							phone: newContact.phone,
-							website: newContact.website
+							website: newContact.website,
+							company: {name: newContact.company.name}
 						};
 						vm.id++;
 						vm.list.push(contact);
 						console.log("new contact added")
-						
+						vm.newContactModal.close();
+
 					};
 
+					vm.editModal;
+
 					vm.openEditModal = function(oldContact) {
-						$uibModal.open({
+						vm.editModal = $uibModal.open({
 							templateUrl: 'Views/editModal.html',
 							animation: true,
 							ariaLabelledBy: 'modal-title',
 							ariaDescribedBy: 'modal-body',
+							/*constroller: "modalController as vm"*/
 
 						});
 
@@ -94,8 +108,9 @@
 								vm.list[i].address.street = newData.address.street;
 								vm.list[i].phone = newData.phone;
 								vm.list[i].website = newData.website;
+								vm.list[i].company.name = newData.company.name;
 								console.log("edited");
-								
+								vm.editModal.close()
 								break;
 							};
 
@@ -112,6 +127,8 @@
 							};
 
 						}
+						vm.editModal.close()
+
 
 					};
 
@@ -131,7 +148,7 @@
 							alert("Unable to retrieve your location");
 						}
 
-						navigator.geolocation.getCurrentPosition(success, error)
+						navigator.geolocation.getCurrentPosition(success, error);
 					};
 
 					function distance(lat1, lon1, lat2, lon2) {
@@ -145,15 +162,34 @@
 					};
 
 					function calculateContactDistance() {
-						var newlist = vm.list;
-						for(var i=1; i<newlist.length; i++) {
-							
-							newlist[i].distance = Math.round(distance(newlist[i].address.geo.lat, newlist[i].address.geo.lng, vm.mylat, vm.mylong )*100) /100;
-							console.log(newlist);
+						for(var i=0; i<vm.list.length; i++) {
+							var userAddress = vm.list[i].address;
 
+
+							vm.list[i].distance = Math.round(distance(userAddress.geo.lat, userAddress.geo.lng, vm.mylat, vm.mylong )*100) /100;
 						};
-						vm.list = newlist;
+
+						$scope.$apply();
 					};
+
+
+					vm.isFieldNotUnique = function(fieldName, value) {
+						var isNotUnique = false;
+						for(var i=0; i<vm.list.length; i++) {
+							if(!vm.list[i].hasOwnProperty(fieldName)) continue;
+
+							if(vm.list[i][fieldName] === value) {
+								isNotUnique = true;
+								break;
+								
+							}
+						}
+						return isNotUnique;
+					};
+
+
+
+
 
 					
 					
@@ -165,10 +201,12 @@
 				}
 			}
 		})
-
+		
 
 
 
 
 
 })();
+
+

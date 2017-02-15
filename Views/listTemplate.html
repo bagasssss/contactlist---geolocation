@@ -52,7 +52,7 @@
 					</td>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody >
 				<tr ng-repeat="contact in ctrl.list| orderBy: ctrl.filterType | filter: searchKeyword">
 					<td>
                         <div> {{$index+1}}</div>
@@ -69,7 +69,7 @@
                     <td>
                     	{{contact.email}}
                     	<button class="btn" ngclipboard data-clipboard-text="{{contact.email}}">
-						    Copy to clipboard
+						    (Copy to clipboard)
 						</button>
                     </td>
                     <td>
