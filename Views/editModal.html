@@ -8,19 +8,20 @@
     <div class="modal-body panel panel-body">
         <div class="col-md-8 form-group">
             <input 
-                type="name" 
+                type="text" 
                 class="form-control" 
                 placeholder="{{ctrl.editContact.name}}" 
                 required 
-                ng-model="newContact.name">
+                ng-model="ctrl.editContact.name" >
         </div>
         <div class="col-md-8 form-group">
             <input 
-                type="name" 
+                type="text" 
                 class="form-control" 
                 placeholder="{{ctrl.editContact.username}}" 
                 required 
-                ng-model="newContact.username">
+                ng-model="ctrl.editContact.username" 
+                value="fg">
         </div>
         <div class="col-md-8 form-group">
             <input 
@@ -28,7 +29,7 @@
                 class="form-control" 
                 placeholder="{{ctrl.editContact.email}}" 
                 required 
-                ng-model="newContact.email" 
+                ng-model="ctrl.editContact.email" 
                 ng-pattern = "ctrl.emailPattern">
         </div>
         <div class="col-md-8 form-group">
@@ -37,7 +38,7 @@
                 class="form-control" 
                 placeholder="{{ctrl.editContact.address.street}}" 
                 required 
-                ng-model="newContact.address.street">
+                ng-model="ctrl.editContact.address.street">
         </div>
         <div class="col-md-8 form-group">
             <input 
@@ -45,7 +46,7 @@
                 class="form-control" 
                 placeholder="{{ctrl.editContact.phone}}" 
                 required 
-                ng-model="newContact.phone">
+                ng-model="ctrl.editContact.phone">
         </div>
         <div class="col-md-8 form-group">
             <input 
@@ -53,7 +54,7 @@
                 class="form-control" 
                 placeholder="{{ctrl.editContact.website}}" 
                 required 
-                ng-model="newContact.website" 
+                ng-model="ctrl.editContact.website" 
                 ng-pattern="ctrl.websitePattern">
         </div>
         <div class="col-md-8 form-group">
@@ -62,14 +63,14 @@
                 class="form-control" 
                 placeholder="{{ctrl.editContact.company.name}}" 
                 required 
-                ng-model="newContact.company.name">
+                ng-model="ctrl.editContact.company.name">
         </div>
 
     </div>
     <div class="modal-footer panel panel-body">
               <button class="btn btn-warning" ng-click="ctrl.deleteContact()">Delete contact</button>
               
-              <button class="btn btn-success" ng-click="ctrl.applyEditing(newContact)" ng-disabled="newContactForm.$invalid">edit</button>
+              <button class="btn btn-success" ng-click="ctrl.applyEditing(ctrl.editContact, newData)" ng-disabled="newContactForm.$invalid">edit</button>
     </div>
 </form>
 </div>

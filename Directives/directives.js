@@ -1,9 +1,9 @@
 (function(){
 	'use strict';
 
-	angular.module("list.directives", ["list.services", "ui.bootstrap", "toastr"])
+	angular.module("list.directives", ["list.services", "ui.bootstrap"])
 
-		.directive("listDirective", function(dataLoader, $uibModal, toastr ){
+		.directive("listDirective", function(dataLoader, $uibModal){
 			return {
 				restrict: "E",
 				templateUrl: "Views/listTemplate.html",
@@ -30,35 +30,10 @@
 					function getDataFromFile(){
 						dataLoader.getData().success(function(data){
 							vm.list = data;
-							console.log("data in ctrl");
-							console.log(vm.list);
-
-
 						})
 					};
 
-					/*$scope.$watch("$viewContentLoaded", function(){
-								toaster.success("Data uploaded!", "Success!")
-
-								toastr.options = {
-									  "closeButton": false,
-									  "debug": false,
-									  "newestOnTop": false,
-									  "progressBar": false,
-									  "positionClass": "toast-top-right",
-									  "preventDuplicates": false,
-									  "onclick": null,
-									  "showDuration": "300",
-									  "hideDuration": "1000",
-									  "timeOut": "5000",
-									  "extendedTimeOut": "1000",
-									  "showEasing": "swing",
-									  "hideEasing": "linear",
-									  "showMethod": "fadeIn",
-									  "hideMethod": "fadeOut"
-									}
-						});*/
-
+					
 					
 
 					vm.changeFilterType = function(filterTypeFromClick) {
@@ -77,8 +52,6 @@
 							animation: true,
 							ariaLabelledBy: 'modal-title',
 							ariaDescribedBy: 'modal-body',
-							
-
 						})
 					};
 
@@ -95,58 +68,33 @@
 						};
 						vm.id++;
 						vm.list.push(contact);
-						console.log("new contact added")
 						vm.newContactModal.close();
-
 					};
 
 					vm.editModal;
-
 					vm.openEditModal = function(oldContact) {
 						vm.editModal = $uibModal.open({
 							templateUrl: 'Views/editModal.html',
 							animation: true,
 							ariaLabelledBy: 'modal-title',
 							ariaDescribedBy: 'modal-body',
-							/*constroller: "modalController as vm"*/
-
 						});
 
 						vm.editContact = oldContact;
-						console.log(vm.editContact);
 					};
 
-					vm.applyEditing = function(newData) {
-						for(var i=0; i<vm.list.length; i++) {
-							if(vm.list[i].id === vm.editContact.id) {
-								vm.list[i].name = newData.name;
-								vm.list[i].username = newData.username;
-								vm.list[i].email = newData.email;
-								vm.list[i].address.street = newData.address.street;
-								vm.list[i].phone = newData.phone;
-								vm.list[i].website = newData.website;
-								vm.list[i].company.name = newData.company.name;
-								console.log("edited");
-								vm.editModal.close()
-								break;
-							};
-
-						}
+					vm.applyEditing = function(editContact,newData) {
+						vm.editModal.close()
 					};
 
 					vm.deleteContact = function() {
 						for(var i=0; i<vm.list.length; i++) {
 							if(vm.list[i].id === vm.editContact.id) {
 								vm.list.splice(i,1);
-								console.log("contact delete");
-								
 								break;
 							};
-
 						}
 						vm.editModal.close()
-
-
 					};
 
 
