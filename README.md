@@ -13,10 +13,10 @@ Small test project.
 - sorting by each columns
 - checking for data unique
 - ability to search 
-- pattern for input forms (website andemail)
+- pattern for input forms (website and email)
 - notification after page loaded
 - figure out your geolocation and calculate distance between you and each contacts
-- "copy to clipboard buttom" near each contacts mail
+- "copy to clipboard button" near each contacts mail
 
 ###Main menu
 
