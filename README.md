@@ -1,6 +1,6 @@
 # contactlist---geolocation
 Small test project.
-Contact list with calculated distance between user and each contact
+
 
 ### Frameworks and Libraries used:
 - Angular 1
@@ -9,7 +9,15 @@ Contact list with calculated distance between user and each contact
 - angular toastr
 
 ### Functionality
-###main menu
+- ability to add, edit and delete fields
+- sorting by each columns
+- checking for data unique
+- pattern for input forms (website andemail)
+- notification after page loaded
+- figure out your geolocation and calculate distance between you and each contacts
+- "copy to clipboard buttom" near each contacts mail
+
+###Main menu
 
 ![Alt text](https://github.com/bagasssss/contactlist---geolocation/blob/master/screenshots/main.jpg "Main")
 
