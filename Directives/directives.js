@@ -1,9 +1,9 @@
 (function(){
 	'use strict';
 
-	angular.module("list.directives", ["list.services", "ui.bootstrap"])
+	angular.module("list.directives", ["list.services", "ui.bootstrap", "toastr"])
 
-		.directive("listDirective", function(listService, $uibModal ){
+		.directive("listDirective", function(dataLoader, $uibModal, toastr ){
 			return {
 				restrict: "E",
 				templateUrl: "Views/listTemplate.html",
@@ -11,31 +11,24 @@
 				controller: function($scope) {
 					var vm = this;
 
-
-						/*$scope.$watch("$viewContentLoaded", function(){
-								alert("All data loaded!");
-						});*/
-
-					//vm.phoneRegex = "((\(\d{3}\) ?)|(\d{3}[- \.]))?\d{3}[- \.]\d{4}(\s(x\d+)?){0,1}$";
 					vm.list;
 					vm.filterType = 'name';
 					vm.id = 11;
 					vm.editContact;
+					vm.emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+					vm.websitePattern = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/;
 
 					vm.mylat;
 					vm.mylong;
 
 					activate();
-
 					function activate() {
 						getDataFromFile();
 						geoFindMe();
-
-
 					};
 
 					function getDataFromFile(){
-						listService.getData().success(function(data){
+						dataLoader.getData().success(function(data){
 							vm.list = data;
 							console.log("data in ctrl");
 							console.log(vm.list);
@@ -43,6 +36,30 @@
 
 						})
 					};
+
+					/*$scope.$watch("$viewContentLoaded", function(){
+								toaster.success("Data uploaded!", "Success!")
+
+								toastr.options = {
+									  "closeButton": false,
+									  "debug": false,
+									  "newestOnTop": false,
+									  "progressBar": false,
+									  "positionClass": "toast-top-right",
+									  "preventDuplicates": false,
+									  "onclick": null,
+									  "showDuration": "300",
+									  "hideDuration": "1000",
+									  "timeOut": "5000",
+									  "extendedTimeOut": "1000",
+									  "showEasing": "swing",
+									  "hideEasing": "linear",
+									  "showMethod": "fadeIn",
+									  "hideMethod": "fadeOut"
+									}
+						});*/
+
+					
 
 					vm.changeFilterType = function(filterTypeFromClick) {
 						console.log("change filter to "+filterTypeFromClick);
@@ -141,18 +158,15 @@
     						console.log("geolocation - SUCCESS")
     						console.log(vm.mylat);
     						console.log(vm.mylong);
-    						//console.log(distance(81.1496, -37.3159, vm.mylat, vm.mylong));
     						calculateContactDistance();
 						};
 						function error() {
 							alert("Unable to retrieve your location");
 						}
-
 						navigator.geolocation.getCurrentPosition(success, error);
 					};
 
 					function distance(lat1, lon1, lat2, lon2) {
-						
 					  var p = 0.017453292519943295;    // Math.PI / 180
 					  var c = Math.cos;
 					  var a = 0.5 - c((lat2 - lat1) * p)/2 + 
@@ -164,24 +178,18 @@
 					function calculateContactDistance() {
 						for(var i=0; i<vm.list.length; i++) {
 							var userAddress = vm.list[i].address;
-
-
 							vm.list[i].distance = Math.round(distance(userAddress.geo.lat, userAddress.geo.lng, vm.mylat, vm.mylong )*100) /100;
 						};
-
 						$scope.$apply();
 					};
-
 
 					vm.isFieldNotUnique = function(fieldName, value) {
 						var isNotUnique = false;
 						for(var i=0; i<vm.list.length; i++) {
 							if(!vm.list[i].hasOwnProperty(fieldName)) continue;
-
 							if(vm.list[i][fieldName] === value) {
 								isNotUnique = true;
 								break;
-								
 							}
 						}
 						return isNotUnique;
@@ -202,6 +210,7 @@
 			}
 		})
 		
+
 
 
 

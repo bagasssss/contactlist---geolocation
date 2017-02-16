@@ -3,7 +3,7 @@
 
 	angular.module("list.services",[])
 
-		.factory("listService", function($http){
+		.factory("dataLoader", function($http){
 			var listPath = 'https://jsonplaceholder.typicode.com/users';
 			return {
 				getData: function() {
@@ -12,12 +12,14 @@
 						url: listPath
 					}).success(function(response) {
 						return response.data;
-						
+
 					})
 				}
 			}
 
 		})
+
+
 
 
 

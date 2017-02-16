@@ -6,46 +6,66 @@
 <form name="newContactForm">
     <div class="modal-body panel panel-body">
         <div class="col-md-8 form-group">
-            <input type="name" class="form-control" placeholder="name" required ng-model="newContact.name">
+            <input 
+              type="name" 
+              class="form-control" 
+              placeholder="name" 
+              required 
+              ng-model="newContact.name">
         </div>
         <div class="col-md-8 form-group">
-            <input type="name" 
-            class="form-control" 
-            placeholder="username" 
-            required 
-            ng-model="newContact.username"
-            ng-class="{'ng-invalid': ctrl.isFieldNotUnique('username', newContact.username)}">
+            <input 
+              type="name" 
+              class="form-control" 
+              placeholder="username" 
+              required 
+              ng-model="newContact.username"
+              ng-class="{'ng-invalid': ctrl.isFieldNotUnique('username', newContact.username)}">
         </div>
         <div class="col-md-8 form-group">
-            <input type="mail" 
-            class="form-control" 
-            placeholder="email" 
-            required 
-            ng-model="newContact.email" 
-            ng-class="{'ng-invalid': ctrl.isFieldNotUnique('username', newContact.username)}" 
-            ng-pattern = '/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i'>
+            <input 
+              type="mail" 
+              class="form-control" 
+              placeholder="email" 
+              required 
+              ng-model="newContact.email" 
+              ng-class="{'ng-invalid': ctrl.isFieldNotUnique('username', newContact.username)}" 
+              ng-pattern = "ctrl.emailPattern">
         </div>
         <div class="col-md-8 form-group">
-            <input type="text" class="form-control" placeholder="address street" required ng-model="newContact.address.street">
+            <input 
+              type="text" 
+              class="form-control" 
+              placeholder="address street" 
+              required 
+              ng-model="newContact.address.street">
         </div>
         <div class="col-md-8 form-group">
-            <input type="text" class="form-control" placeholder="phone" ng-pattern="ctrl.phoneRegex" required ng-model="newContact.phone">
+            <input 
+              type="text" 
+              class="form-control" 
+              placeholder="phone" 
+              ng-pattern="ctrl.phoneRegex" 
+              required 
+              ng-model="newContact.phone">
         </div>
         <div class="col-md-8 form-group">
-            <input type="text" 
-            class="form-control" 
-            placeholder="website" 
-            required 
-            ng-model="newContact.website" 
-            ng-pattern="/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/">
+            <input 
+              type="text" 
+              class="form-control" 
+              placeholder="website" 
+              required 
+              ng-model="newContact.website" 
+              ng-pattern="ctrl.websitePattern">
         </div>
         <div class="col-md-8 form-group">
-            <input type="text" 
-            class="form-control" 
-            placeholder="company name" 
-            required 
-            ng-model="newContact.company.name",
-            ng-class="{'ng-invalid': ctrl.isFieldNotUnique('username', newContact.username)}">
+            <input 
+              type="text" 
+              class="form-control" 
+              placeholder="company name" 
+              required 
+              ng-model="newContact.company.name",
+              ng-class="{'ng-invalid': ctrl.isFieldNotUnique('username', newContact.username)}">
         </div>
 
     </div>
