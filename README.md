@@ -12,6 +12,7 @@ Small test project.
 - ability to add, edit and delete fields
 - sorting by each columns
 - checking for data unique
+- ability to search 
 - pattern for input forms (website andemail)
 - notification after page loaded
 - figure out your geolocation and calculate distance between you and each contacts
