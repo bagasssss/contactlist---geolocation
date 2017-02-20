@@ -10,7 +10,7 @@
             <input 
                 type="text" 
                 class="form-control" 
-                placeholder="{{ctrl.editContact.name}}" 
+                placeholder="{{ctrl.editContactForLabel.name}}" 
                 required 
                 ng-model="ctrl.editContact.name" >
         </div>
@@ -18,7 +18,7 @@
             <input 
                 type="text" 
                 class="form-control" 
-                placeholder="{{ctrl.editContact.username}}" 
+                placeholder="{{ctrl.editContactForLabel.username}}" 
                 required 
                 ng-model="ctrl.editContact.username" 
                 value="fg">
@@ -27,7 +27,7 @@
             <input 
                 type="mail" 
                 class="form-control" 
-                placeholder="{{ctrl.editContact.email}}" 
+                placeholder="{{ctrl.editContactForLabel.email}}" 
                 required 
                 ng-model="ctrl.editContact.email" 
                 ng-pattern = "ctrl.emailPattern">
@@ -36,7 +36,7 @@
             <input 
                 type="text" 
                 class="form-control" 
-                placeholder="{{ctrl.editContact.address.street}}" 
+                placeholder="{{ctrl.editContactForLabel.address.street}}" 
                 required 
                 ng-model="ctrl.editContact.address.street">
         </div>
@@ -44,7 +44,7 @@
             <input 
                 type="text" 
                 class="form-control" 
-                placeholder="{{ctrl.editContact.phone}}" 
+                placeholder="{{ctrl.editContactForLabel.phone}}" 
                 required 
                 ng-model="ctrl.editContact.phone">
         </div>
@@ -52,7 +52,7 @@
             <input 
                 type="text" 
                 class="form-control" 
-                placeholder="{{ctrl.editContact.website}}" 
+                placeholder="{{ctrl.editContactForLabel.website}}" 
                 required 
                 ng-model="ctrl.editContact.website" 
                 ng-pattern="ctrl.websitePattern">
@@ -61,15 +61,15 @@
             <input 
                 type="text" 
                 class="form-control" 
-                placeholder="{{ctrl.editContact.company.name}}" 
+                placeholder="{{ctrl.editContactForLabel.company.name}}" 
                 required 
                 ng-model="ctrl.editContact.company.name">
         </div>
 
     </div>
     <div class="modal-footer panel panel-body">
-              <button class="btn btn-warning" ng-click="ctrl.deleteContact()">Delete contact</button>
-              
+              <button class="btn btn-danger" ng-click="ctrl.deleteContact()">Delete contact</button>
+              <button class="btn btn-warning" ng-click="ctrl.returnOriginalData()">Cancel changes</button>
               <button class="btn btn-success" ng-click="ctrl.applyEditing(ctrl.editContact, newData)" ng-disabled="newContactForm.$invalid">edit</button>
     </div>
 </form>

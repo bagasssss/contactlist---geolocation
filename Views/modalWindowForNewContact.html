@@ -46,7 +46,7 @@
               class="form-control" 
               placeholder="phone" 
               ng-pattern="ctrl.phoneRegex" 
-              required 
+               
               ng-model="newContact.phone">
         </div>
         <div class="col-md-8 form-group">
@@ -54,7 +54,7 @@
               type="text" 
               class="form-control" 
               placeholder="website" 
-              required 
+              
               ng-model="newContact.website" 
               ng-pattern="ctrl.websitePattern">
         </div>
@@ -71,7 +71,6 @@
     </div>
     <div class="modal-footer panel panel-body">
               <button class="btn btn-warning" ng-click="$dismiss()">Cancel</button>
-              
               <button class="btn btn-success" ng-click="ctrl.addContact(newContact)" ng-disabled="newContactForm.$invalid">Add</button>
     </div>
 </form>

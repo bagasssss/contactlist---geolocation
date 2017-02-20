@@ -9,12 +9,14 @@
 				templateUrl: "Views/listTemplate.html",
 				controllerAs: "ctrl",
 				controller: function($scope) {
+
 					var vm = this;
 
 					vm.list;
 					vm.filterType = 'name';
 					vm.id = 11;
 					vm.editContact;
+					vm.editContactForLabel;
 					vm.emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 					vm.websitePattern = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/;
 
@@ -32,9 +34,6 @@
 							vm.list = data;
 						})
 					};
-
-					
-					
 
 					vm.changeFilterType = function(filterTypeFromClick) {
 						console.log("change filter to "+filterTypeFromClick);
@@ -61,7 +60,7 @@
 							name: newContact.name,
 							username: newContact.username,
 							email: newContact.email,
-							address: {street: newContact.address},
+							address: {street: newContact.address.street},
 							phone: newContact.phone,
 							website: newContact.website,
 							company: {name: newContact.company.name}
@@ -78,12 +77,36 @@
 							animation: true,
 							ariaLabelledBy: 'modal-title',
 							ariaDescribedBy: 'modal-body',
+							backdrop  : 'static',
+   							keyboard  : false
 						});
 
 						vm.editContact = oldContact;
+						var temporaryC = {
+							name: oldContact.name,
+							username: oldContact.username,
+							email: oldContact.email,
+							address: {street: oldContact.address.street},
+							phone: oldContact.phone,
+							website: oldContact.website,
+							company: {name: oldContact.company.name},
+							geo: oldContact.geo
+						};
+						vm.editContactForLabel = temporaryC;
 					};
 
 					vm.applyEditing = function(editContact,newData) {
+						vm.editModal.close()
+					};
+
+					vm.returnOriginalData = function() {
+						vm.editContact.name = vm.editContactForLabel.name;
+						vm.editContact.username = vm.editContactForLabel.username;
+						vm.editContact.email = vm.editContactForLabel.email;
+						vm.editContact.address.street = vm.editContactForLabel.address.street;
+						vm.editContact.phone = vm.editContactForLabel.phone;
+						vm.editContact.website = vm.editContactForLabel.website;
+						vm.editContact.company.name = vm.editContactForLabel.company.name;
 						vm.editModal.close()
 					};
 
@@ -142,28 +165,9 @@
 						}
 						return isNotUnique;
 					};
-
-
-
-
-
-					
-					
-
-
-
-
-
 				}
 			}
 		})
-		
-
-
-
-
-
-
 })();
 
 
